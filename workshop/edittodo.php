@@ -2,7 +2,7 @@
 
 session_start();
 include "lib/todo.php";
-if(empty($_SESSION['login'])){
+if(empty($_SESSION['login']) || $_SESSION['login']['admin'] == 0){
     header("LOCATION: login.php");
 }
 

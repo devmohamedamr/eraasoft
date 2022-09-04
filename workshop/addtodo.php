@@ -6,21 +6,34 @@ if(empty($_SESSION['login'])){
     header("LOCATION: login.php");
 }
 
+$error = [];
 
 if(isset($_POST['title'])){
     $title = $_POST['title'];
     $body = $_POST['body'];
-    
+
     $filetmp = $_FILES['img']['tmp_name'];
     $img = $_FILES['img']['name'];
 
     move_uploaded_file($filetmp,"upload/".$img);
     $user_id = $_SESSION['login']['id'];
-    $res =  addTodo($title,$body,$img,$user_id);
 
-    if($res == 1){
-        header("location: index.php");
+    if(empty($title) || strlen($title) == 0 || $title == ''){
+        $error[] = "title is required";
     }
+
+
+    if(empty($body) || strlen($body) == 0 || $body == ''){
+        $error[] = "body is required";
+    }
+    if(count($error)==0){
+        $res =  addTodo($title,$body,$img,$user_id);
+
+        if($res == 1){
+            header("location: index.php");
+        }
+    }
+  
 }
 
 
@@ -37,6 +50,14 @@ if(isset($_POST['title'])){
     <title>Document</title>
 </head>
 <body>
+    <?php if(count($error)>0): ?>
+    <ul>
+    <?php foreach($error as $e): ?>
+
+        <li><?= $e; ?></li>
+    <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
     <form action="addtodo.php" method="post" enctype="multipart/form-data">
         <input type="text" name="title">
         <textarea name="body"></textarea>

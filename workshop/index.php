@@ -26,9 +26,11 @@ $list_of_todos =  todos($_SESSION['login']['id']);
             <th>title</th>
             <th>body</th>
             <th>img</th>
+            <?php if($_SESSION['login']['admin'] == 1): ?>
             <th>done</th>
             <th>update</th>
             <th>delete</th>
+            <?php endif; ?>
         </tr>
         <?php foreach($list_of_todos as $todo): ?>
             <?php if($todo['status'] == 1): ?>
@@ -40,9 +42,12 @@ $list_of_todos =  todos($_SESSION['login']['id']);
                 <td><?= $todo['task']; ?></td>
                 <td><?= $todo['body']; ?></td>
                 <td><img width="100px" height="100px" src="upload/<?= $todo['img']; ?>"></td>
+                <?php if($_SESSION['login']['admin'] == 1): ?>
+
                 <td><a href="donetodo.php?id=<?= $todo['id']; ?>">done</a></td>
                 <td><a href="edittodo.php?id=<?= $todo['id']; ?>">edit</a></td>
                 <td><a href="deletetodo.php?id=<?= $todo['id']; ?>">delete</a></td>
+                <?php endif; ?>    
             </tr>
         <?php endforeach; ?>
     </table>

@@ -1,10 +1,11 @@
 <?php
 
 namespace Eraasoft\Mvc\controllers;
-
-class User{
+use Eraasoft\Mvc\core\BaseController;
+class User {
+    use BaseController;
     public function index(){
-        echo "index";
+        $this->view("index");
     }
 
     public function create(){

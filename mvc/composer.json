@@ -1,0 +1,17 @@
+{
+    "name": "eraasoft/mvc",
+    "description": "mvc",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Eraasoft\\Mvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mohamed amr",
+            "email": "dev.mohamedamr@gmail.com"
+        }
+    ],
+    "require": {}
+}

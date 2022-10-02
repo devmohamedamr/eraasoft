@@ -1,10 +1,10 @@
 <?php
-
+namespace mohamed\database;
 
 class db{
 
-    public $connection;
-    public $sql;
+    private $connection;
+    private $sql;
     public function __construct($server,$user,$pass,$db)
     {
         $this->connection = mysqli_connect($server,$user,$pass,$db);
@@ -29,18 +29,19 @@ class db{
         $this->sql .= " OR `$column` $operator '$value'";
         return $this;
     }
+    private function query(){
+        return  mysqli_query($this->connection,$this->sql);
+    }
     public function all(){
         // echo $this->sql;die;
-       $query =   mysqli_query($this->connection,$this->sql);
-       return mysqli_fetch_all($query,MYSQLI_ASSOC);
+       return mysqli_fetch_all($this->query(),MYSQLI_ASSOC);
     }
 
     public function first(){
-        $query =   mysqli_query($this->connection,$this->sql);
-        return mysqli_fetch_assoc($query);
+        return mysqli_fetch_assoc($this->query());
     }
     public function excute(){
-         mysqli_query($this->connection,$this->sql);
+            $this->query();
          return  mysqli_affected_rows($this->connection);
     }
 
@@ -75,9 +76,10 @@ class db{
     }
 }
 
-$db = new db('localhost','root','','eraasoftworkshop');
-echo "<pre>";
-print_r($db->select("todos","*")->join("inner","user","user.id","todos.user_id")->all());
+// $db = new db('localhost','root','','eraasoftworkshop');
+// // $db->connection = 'awdaw';
+// echo "<pre>";
+// print_r($db->select("todos","*")->join("inner","user","user.id","todos.user_id")->all());
 // $db->select('user',"*")->where("id","=",7)->first();
 
 

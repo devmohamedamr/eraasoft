@@ -28,11 +28,15 @@ class branches{
     }
 
     public function edit($id){
-
+       $branche =  $this->model->getBranche($id);
+        return $this->view("branches/edit",['branche'=>$branche]);
     }
 
     public function update(){
-
+        $id = $_POST['id'];
+        unset($_POST['id']);
+        $this->model->udpateBranche($_POST,$id);
+        header("location: index");
     }
 
     public function delete($id){

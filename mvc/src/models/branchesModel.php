@@ -15,4 +15,12 @@ class branchesModel extends db{
     public function deleteBranch($id){
         return $this->delete("branches")->where("id","=",$id)->excute();
     }
+
+    public function getBranche($id){
+        return $this->select("branches","*")->where("id","=",$id)->first();
+    }
+
+    public function udpateBranche($data,$id){
+        return $this->update("branches",$data)->where("id","=",$id)->excute(); 
+    }
 }

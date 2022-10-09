@@ -18,7 +18,7 @@
                 <tr>
                     <td><?= $branche['id']; ?></td>
                     <td><?= $branche['name']; ?></td>
-                    <td><a href="update/<?= $branche['id']; ?>">update</a></td>
+                    <td><a href="edit/<?= $branche['id']; ?>">update</a></td>
                     <td><a href="delete/<?= $branche['id']; ?>">delete</a></td>
 
                 </tr>

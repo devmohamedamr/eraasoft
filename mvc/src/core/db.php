@@ -29,19 +29,20 @@ class db{
         $this->sql .= " OR `$column` $operator '$value'";
         return $this;
     }
-    private function query(){
-        return  mysqli_query($this->connection,$this->sql);
-    }
+  
     public function all(){
-        // echo $this->sql;die;
-       return mysqli_fetch_all($this->query(),MYSQLI_ASSOC);
+        $query =     mysqli_query($this->connection,$this->sql);
+       return mysqli_fetch_all($query,MYSQLI_ASSOC);
     }
 
     public function first(){
-        return mysqli_fetch_assoc($this->query());
+        $query =     mysqli_query($this->connection,$this->sql);
+
+        return mysqli_fetch_assoc($query);
     }
     public function excute(){
-            $this->query();
+        // echo $this->sql;die;
+        mysqli_query($this->connection,$this->sql);
          return  mysqli_affected_rows($this->connection);
     }
 

@@ -7,12 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>test</h1>
-    <ul>
-        <?php foreach($y as $user): ?>
-        <li><?= $user['name']; ?></li>
-        <?php endforeach; ?>
-    </ul>
+    <form action="store" method="post">
+        <input type="text" name="name">
+        <input type="submit">
+    </form>
 </body>
 </html>
-
